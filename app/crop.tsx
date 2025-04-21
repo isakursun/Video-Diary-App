@@ -11,6 +11,7 @@ interface CropStep {
   segmentEnd?: number;
 }
 
+// CropScreen allows users to select a video, crop a segment, and save it to the diary.
 const CropScreen = () => {
   const [step, setStep] = useState<CropStep>({ step: 1 });
   const [selectedVideo, setSelectedVideo] =
@@ -27,6 +28,7 @@ const CropScreen = () => {
   const router = require("expo-router").useRouter();
   const { v4: uuidv4 } = require("uuid");
 
+  // Handles picking a video file from the device.
   const pickVideo = async () => {
     const result = await DocumentPicker.getDocumentAsync({
       type: "video/*",
@@ -71,6 +73,7 @@ const CropScreen = () => {
     );
   }
 
+  // Called when the video loads to get its duration.
   const onLoad = (status: any) => {
     if (status?.durationMillis) {
       setDuration(status.durationMillis / 1000);
@@ -128,6 +131,8 @@ const CropScreen = () => {
   if (step.step === 3 && selectedVideo) {
     const segmentStart = step.segmentStart ?? 0;
     const segmentEnd = step.segmentEnd ?? 5;
+
+    // Handles adding the cropped video to the store after validation and cropping.
     const handleAdd = async () => {
       if (!name.trim()) {
         setError("Please enter a video name.");

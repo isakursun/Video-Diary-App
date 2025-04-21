@@ -6,10 +6,12 @@ import VideoCard from "../components/VideoCard";
 import { useVideoStore } from "../store/videoStore"; // zustand store import
 import Header from "../components/Header";
 
+// HomeScreen displays the list of videos or a prompt to add a new video if none exist.
 const HomeScreen = () => {
   const router = useRouter();
   const videos = useVideoStore((state) => state.videos);
 
+  // If no videos exist, display a prompt to add a new video.
   if (videos.length === 0) {
     return (
       <View className="flex-1 bg-white px-4 pt-8">
@@ -23,6 +25,7 @@ const HomeScreen = () => {
           <Pressable
             className="bg-[#05B8A2] rounded-full px-8 py-4 flex-row items-center shadow-lg"
             style={{ elevation: 4 }}
+            // Navigates to the Crop screen when the user wants to add a new video.
             onPress={() => router.push("/crop")}
           >
             <Text style={{ fontSize: 22, marginRight: 8 }}>➕</Text>
@@ -45,6 +48,7 @@ const HomeScreen = () => {
         <Pressable
           className="bg-[#05B8A2] rounded-full px-6 py-3 flex-row items-center shadow-lg"
           style={{ elevation: 4 }}
+          // Navigates to the Crop screen when the user wants to crop a video.
           onPress={() => router.push("/crop")}
         >
           <Text className="text-white font-bold text-lg">Crop</Text>

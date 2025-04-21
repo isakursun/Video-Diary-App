@@ -5,6 +5,7 @@ import { useVideoStore } from "../store/videoStore";
 import { Video, ResizeMode } from "expo-av";
 import Header from "../components/Header";
 
+// DetailsScreen shows the details of a selected video and allows editing or deleting it.
 const DetailsScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
   const video = useVideoStore((state) => state.videos.find((v) => v.id === id));
@@ -20,6 +21,7 @@ const DetailsScreen = () => {
   const router = require("expo-router").useRouter();
   const { removeVideo } =
     require("../store/videoStore").useVideoStore.getState();
+  // Deletes the current video and navigates back to the home screen.
   const handleDelete = () => {
     removeVideo(video.id);
     router.push("/");
@@ -52,6 +54,16 @@ const DetailsScreen = () => {
             <Text className="text-[#05B8A2] text-lg mr-2">✏️</Text>
             <Text className="text-[#05B8A2] font-bold text-base tracking-wide">
               Edit
+            </Text>
+          </Pressable>
+          <Pressable
+            onPress={handleDelete}
+            className="w-48 bg-red-500 py-3 rounded-xl items-center shadow mb-4 flex-row justify-center"
+            style={{ elevation: 2 }}
+          >
+            <Text className="text-white text-lg mr-2">❌</Text>
+            <Text className="text-white font-bold text-base tracking-wide">
+              Delete
             </Text>
           </Pressable>
         </View>

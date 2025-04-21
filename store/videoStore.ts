@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// Video tipini tanımlıyoruz
+// VideoItem defines the structure for a single video entry in the store.
 export interface VideoItem {
   id: string;
   name: string;
@@ -13,12 +13,20 @@ export interface VideoItem {
   segmentEnd: number;
 }
 
-// Store'un tipi
+// VideoStore describes the shape of the Zustand video store.
 interface VideoStore {
   videos: VideoItem[];
-  addVideo: (video: VideoItem) => void;
-  removeVideo: (id: string) => void;
-  updateVideo: (id: string, update: Partial<VideoItem>) => void;
+  // addVideo adds a new video to the store.
+  addVideo: (video: VideoItem) =>
+    set((state) => ({ videos: [video, ...state.videos] })),
+  // removeVideo deletes a video by its id.
+  removeVideo: (id: string) =>
+    set((state) => ({ videos: state.videos.filter((v) => v.id !== id) })),
+  // updateVideo updates the properties of a video by its id.
+  updateVideo: (id: string, update: Partial<VideoItem>) =>
+    set((state) => ({
+      videos: state.videos.map((v) => v.id === id ? { ...v, ...update } : v)
+    })),
 }
 
 // Zustand ile video store'u oluştur

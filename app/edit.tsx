@@ -4,6 +4,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useVideoStore } from "../store/videoStore";
 import Header from "../components/Header";
 
+// EditScreen lets users update the name and description of an existing video.
 const EditScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
@@ -23,6 +24,7 @@ const EditScreen = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Saves the updated video information to the store.
   const handleSave = async () => {
     if (!name.trim()) {
       setError("Video adı boş olamaz.");
@@ -42,7 +44,7 @@ const EditScreen = () => {
   return (
     <View className="flex-1 bg-gray-50 px-4 pt-8 items-center">
       <Header title="Edit Video" />
-      <Text className="text-2xl font-bold mb-6 text-gray-800">Edit Video</Text> // already English
+      <Text className="text-2xl font-bold mb-6 text-gray-800">Edit Video</Text> 
       <View className="w-full max-w-xs mb-4">
         <Text className="mb-1 text-gray-700">Name</Text>
         <TextInput

@@ -1,6 +1,7 @@
 import { View, Text, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 
+// VideoCardProps defines the expected props for the VideoCard component.
 export interface VideoCardProps {
   id: string;
   name: string;
@@ -11,6 +12,7 @@ export interface VideoCardProps {
   segmentEnd: number;
 }
 
+// VideoCard displays a summary card for a video and provides delete functionality.
 const VideoCard: React.FC<VideoCardProps> = (props) => {
   const { id, name, description } = props;
   const router = useRouter();
@@ -21,6 +23,7 @@ const VideoCard: React.FC<VideoCardProps> = (props) => {
     >
       <View className="flex-row items-center justify-center bg-white rounded-3xl px-3 py-2 min-h-20 relative shadow-lg border-[1px] border-[#05B8A2]">
         <Pressable
+          // Removes the video from the store when the delete button is pressed.
           onPress={() => {
             const { removeVideo } =
               require("../store/videoStore").useVideoStore.getState();
