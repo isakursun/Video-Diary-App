@@ -6,7 +6,9 @@ The trimmed videos are listed on the main screen of the application, where the u
 ## To run the project
 
 - npm install
+- npm install -g expo-cli
 - npm install -g eas-cli
+- npx expo login
 - eas build --profile development --platform android
 - npx expo start
 
