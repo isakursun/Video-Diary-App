@@ -4,6 +4,7 @@
     "slug": "video-diary-app",
     "version": "1.0.0",
     "orientation": "portrait",
+    "scheme": "video-diary-app",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
@@ -19,10 +20,23 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.isaacccc.videodiaryapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-video"
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "0bcc2c02-0355-4d20-8a56-b944456878bb"
+      }
     }
   }
 }
